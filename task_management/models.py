@@ -7,6 +7,8 @@ class Book(models.Model):
     title = models.CharField(max_length=100)
     author = models.CharField(max_length=100)
     is_available = models.BooleanField(default=True)
+    class Meta:
+        app_label = 'task_management'
 
 class Transaction(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)

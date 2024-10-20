@@ -20,6 +20,29 @@ class TaskViewSet(viewsets.ModelViewSet):
         task.mark_as_incomplete()
         serializer = self.get_serializer(task)
         return Response(serializer.data)
+        filter_backends = [filters.OrderingFilter]
+    ordering_fields = ['due_date', 'priority']
+    ordering = ['due_date', 'priority']
+
+    def get_queryset(self):
+        queryset = Task.objects.filter(user=self.request.user)
+        
+        status = self.request.query_params.get('status', None)
+        if status:
+            if status.lower() == 'pending':
+                queryset = queryset.filter(completed=False)
+            elif status.lower() == 'completed':
+                queryset = queryset.filter(completed=True)
+
+        priority = self.request.query_params.get('priority', None)
+        if priority:
+            queryset = queryset.filter(priority=priority)
+
+        due_date = self.request.query_params.get('due_date', None)
+        if due_date:
+            queryset = queryset.filter(due_date=due_date)
+
+        return queryset
 
 class UserViewSet(viewsets.ModelViewSet):
     queryset = CustomUser.objects.all()
