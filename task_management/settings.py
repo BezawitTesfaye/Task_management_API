@@ -51,7 +51,7 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'Task_management_API.urls'
+ROOT_URLCONF = 'task_management.urls'
 
 TEMPLATES = [
     {
@@ -69,7 +69,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'Task_management_API.wsgi.application'
+WSGI_APPLICATION = 'task_management.wsgi.application'
 
 
 # Database

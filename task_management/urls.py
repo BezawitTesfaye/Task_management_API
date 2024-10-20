@@ -1,6 +1,6 @@
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from .task_management.views import BookViewSet, TransactionViewSet, UserViewSet, TaskViewSet
+from .views import BookViewSet, TransactionViewSet, UserViewSet, TaskViewSet
 from django.urls import path
 
 router = DefaultRouter()
