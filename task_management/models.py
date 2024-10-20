@@ -18,7 +18,18 @@ class Transaction(models.Model):
 
 class CustomUser(AbstractUser):
     tasks = models.ManyToManyField('Task', related_name='users')
-    
+    groups = models.ManyToManyField(
+        'auth.Group',
+        related_name='custom_user_groups',
+        blank=True,
+    )
+    user_permissions = models.ManyToManyField(
+        'auth.Permission',
+        related_name='custom_user_permissions',
+        blank=True,
+    )
+CustomUser.groups.field.remote_field.related_name = 'custom_user_groups'
+CustomUser.user_permissions.field.remote_field.related_name = 'custom_user_permissions'
 class Task(models.Model):
     title = models.CharField(max_length=100)
     description = models.TextField()
